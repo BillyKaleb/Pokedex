@@ -1,7 +1,9 @@
-package com.kaleb.pokedex;
+package com.kaleb.pokedex.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.kaleb.pokedex.R;
 
 public class PokemonActivity extends AppCompatActivity {
 
