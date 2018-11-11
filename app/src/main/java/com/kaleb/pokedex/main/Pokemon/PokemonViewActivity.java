@@ -2,6 +2,7 @@ package com.kaleb.pokedex.main.Pokemon;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,6 +19,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
+import com.kaleb.pokedex.RecyclerAdapter;
+import com.kaleb.pokedex.data.model.Result;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PokemonViewActivity extends AppCompatActivity implements PokemonViewContract {
 
@@ -29,6 +35,8 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
     private ProgressBar progressBar;
     private PokemonPresenter pokemonPresenter;
     private RecyclerView recyclerView;
+    private RecyclerAdapter recyclerAdapter;
+    private List<Result> resultList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,15 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         textView = findViewById(R.id.pokemonName);
         progressBar = findViewById(R.id.itemProgressBar);
         recyclerView = findViewById(R.id.recyclerView);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        resultList = new ArrayList<>();
+        recyclerAdapter = new RecyclerAdapter(resultList);
+        recyclerView.setAdapter(recyclerAdapter);
+        pokemonPresenter.getFullPokemonList();
+
+//        pokemonPresenter.;
 
         editText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
@@ -63,6 +80,11 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
             }
         });
 
+    }
+
+    @Override
+    public void addPokemonResults(List<Result> results) {
+        recyclerAdapter.addList(results);
     }
 
     @Override

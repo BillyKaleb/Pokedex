@@ -1,7 +1,14 @@
 package com.kaleb.pokedex.main.Pokemon;
 
+import android.util.Log;
+
 import com.kaleb.pokedex.data.RemoteRepository;
+import com.kaleb.pokedex.data.model.Result;
 import com.kaleb.pokedex.data.response.PokemonDetailsResponse;
+import com.kaleb.pokedex.data.response.PokemonResponse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -12,6 +19,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
     private PokemonViewContract view;
     private RemoteRepository remoteRepository;
     private String caps;
+    private List<Result> allResultList;
+    private List<Result> showResultList = new ArrayList<>();
 
     public PokemonPresenter(PokemonViewContract pokemonViewContract, RemoteRepository remoteRepository) {
         this.view = pokemonViewContract;
@@ -74,7 +83,35 @@ public class PokemonPresenter implements PokemonPresenterContract {
         }
     }
 
-    String capitalizeText(String text){
+    @Override
+    public void getFullPokemonList() {
+        view.showLoading(true);
+        remoteRepository.getPokemonList().enqueue(new Callback<PokemonResponse>() {
+            @Override
+            public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
+                allResultList = new ArrayList<>(response.body().getResults());
+                Log.d("Result", allResultList.get(0).getName());
+                showPokemonList(1);
+            }
+
+            @Override
+            public void onFailure(Call<PokemonResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    @Override
+    public void showPokemonList(int page) {
+        showResultList.clear();
+        page = page * 20;
+        for (int x = 20; x > 0; x--) {
+            showResultList.add(allResultList.get(page - x));
+        }
+        view.addPokemonResults(showResultList);
+    }
+
+    String capitalizeText(String text) {
         text = text.substring(0, 1).toUpperCase() + text.substring(1);
         return text;
     }
