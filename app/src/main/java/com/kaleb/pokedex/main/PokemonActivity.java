@@ -2,14 +2,47 @@ package com.kaleb.pokedex.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.util.ByteBufferUtil;
 import com.kaleb.pokedex.R;
 
-public class PokemonActivity extends AppCompatActivity {
+public class PokemonActivity extends AppCompatActivity implements PokemonContract{
+
+    private RelativeLayout relativeLayout;
+    private EditText editText;
+    private Button button;
+    private ImageView imageView;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon);
+
+        relativeLayout = findViewById(R.id.relativeLayoutClick);
+        editText = findViewById(R.id.editTextPokemon);
+        button = findViewById(R.id.buttonPokemon);
+        imageView = findViewById(R.id.imageViewPokemon);
+        textView = findViewById(R.id.pokemonName);
+    }
+
+    @Override
+    public void showPokemon(String pokemonName, String pokemonImg, Boolean showLayout) {
+
+    }
+
+    @Override
+    public void showLoading(Boolean showLoading) {
+
+    }
+
+    @Override
+    public void showToast(String toast) {
+
     }
 }
