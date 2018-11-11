@@ -40,4 +40,9 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         moveList = findViewById(R.id.moveList);
 
     }
+
+    @Override
+    public void setPokemonDetails(String name, String img, String desc, String type, String ability, int form) {
+        pok
+    }
 }
