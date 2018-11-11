@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.kaleb.pokedex.EndlessRecyclerViewOnScrollListener;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
 import com.kaleb.pokedex.RecyclerAdapter;
@@ -37,6 +38,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
     private List<Result> resultList;
+    private EndlessRecyclerViewOnScrollListener endlessRecyclerViewOnScrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,12 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         textView = findViewById(R.id.pokemonName);
         progressBar = findViewById(R.id.itemProgressBar);
         recyclerView = findViewById(R.id.recyclerView);
+        endlessRecyclerViewOnScrollListener = new EndlessRecyclerViewOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                pokemonPresenter.showPokemonList();
+            }
+        };
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -59,7 +67,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         recyclerView.setAdapter(recyclerAdapter);
         pokemonPresenter.getFullPokemonList();
 
-//        pokemonPresenter.;
+        recyclerView.addOnScrollListener(endlessRecyclerViewOnScrollListener);
 
         editText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override

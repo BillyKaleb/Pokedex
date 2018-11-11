@@ -1,5 +1,6 @@
 package com.kaleb.pokedex.main.Pokemon;
 
+import android.os.Handler;
 import android.util.Log;
 
 import com.kaleb.pokedex.data.RemoteRepository;
@@ -21,6 +22,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
     private String caps;
     private List<Result> allResultList;
     private List<Result> showResultList = new ArrayList<>();
+    private static int pageCounter;
 
     public PokemonPresenter(PokemonViewContract pokemonViewContract, RemoteRepository remoteRepository) {
         this.view = pokemonViewContract;
@@ -91,7 +93,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
             public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
                 allResultList = new ArrayList<>(response.body().getResults());
                 Log.d("Result", allResultList.get(0).getName());
-                showPokemonList(1);
+                pageCounter = 1;
+                showPokemonList();
             }
 
             @Override
@@ -102,14 +105,22 @@ public class PokemonPresenter implements PokemonPresenterContract {
     }
 
     @Override
-    public void showPokemonList(int page) {
-        showResultList.clear();
-        page = page * 20;
-        for (int x = 20; x > 0; x--) {
-            showResultList.add(allResultList.get(page - x));
-        }
-        view.showLoading(false);
-        view.addPokemonResults(showResultList);
+    public void showPokemonList() {
+        view.showLoading(true);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showResultList.clear();
+                int page = pageCounter * 20;
+                for (int x = 20; x > 0; x--) {
+                    showResultList.add(allResultList.get(page - x));
+                }
+                view.showLoading(false);
+                view.addPokemonResults(showResultList);
+                pageCounter++;
+            }
+        }, 2000);
     }
 
     String capitalizeText(String text) {
