@@ -18,6 +18,7 @@
             android:singleLine="true"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
             android:imeOptions="actionDone"/>
 
         <Button
