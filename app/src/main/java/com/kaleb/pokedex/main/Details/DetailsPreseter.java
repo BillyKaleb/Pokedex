@@ -1,7 +1,13 @@
 package com.kaleb.pokedex.main.Details;
 
+import android.util.Log;
+
 import com.kaleb.pokedex.data.RemoteRepository;
+import com.kaleb.pokedex.data.model.Move_;
 import com.kaleb.pokedex.data.response.PokemonDetailsResponse;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,6 +20,7 @@ public class DetailsPreseter implements DetailsPresenterContract {
     private String caps;
     private String types;
     private String abilities;
+    private List<Move_> move = new ArrayList<>();
 
 
     public DetailsPreseter(DetailsViewContract view, RemoteRepository remoteRepository) {
@@ -36,12 +43,17 @@ public class DetailsPreseter implements DetailsPresenterContract {
                         types = response.body().getTypes().get(0).getType().getName();
                     }
 
-                    if (response.body().getAbilities().size() > 1 ){
+                    if (response.body().getAbilities().size() > 1) {
                         abilities = abilityBuilder(response);
                     } else {
                         abilities = response.body().getAbilities().get(0).getAbility().getName();
                     }
-                    view.setPokemonDetails(caps, response.body().getSprites().getFrontDefault(), types, abilities, response.body().getForms().size());
+
+                    for (int i = 0; i < response.body().getMoves().size(); i++) {
+                        move.add(response.body().getMoves().get(i).getMove());
+                        Log.d("TAG", "onResponse: " + move.size());
+                    }
+                    view.setPokemonDetails(caps, response.body().getSprites().getFrontDefault(), types, abilities, response.body().getForms().size(), move);
                 } else {
                     view.showToast(String.valueOf(response.code()) + " error!");
                 }
@@ -62,27 +74,27 @@ public class DetailsPreseter implements DetailsPresenterContract {
         return text;
     }
 
-    String typeBuilder(Response<PokemonDetailsResponse> response){
+    String typeBuilder(Response<PokemonDetailsResponse> response) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < response.body().getTypes().size(); i++) {
             String str = response.body().getTypes().get(i).getType().getName();
             sb.append(str.toString());
             sb.append(", ");
         }
-        sb.deleteCharAt(sb.length()-1);
-        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length() - 1);
+        sb.deleteCharAt(sb.length() - 1);
         return types = sb.toString();
     }
 
-    String abilityBuilder(Response<PokemonDetailsResponse> response){
+    String abilityBuilder(Response<PokemonDetailsResponse> response) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < response.body().getAbilities().size(); i++) {
             String str = response.body().getAbilities().get(i).getAbility().getName();
             sb.append(str.toString());
             sb.append(", ");
         }
-        sb.deleteCharAt(sb.length()-1);
-        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length() - 1);
+        sb.deleteCharAt(sb.length() - 1);
         return abilities = sb.toString();
     }
 }

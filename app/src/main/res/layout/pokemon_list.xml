@@ -2,23 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pokemon_recycle_layout"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:padding="16dp">
-
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_centerVertical="true"
-        android:background="@drawable/ic_buttons"/>
+    android:layout_height="50dp">
 
     <TextView
-        android:id="@+id/textListView"
+        android:id="@+id/textRecycler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
-        android:text="Move List"
+        android:text="PokemonName"
         android:textStyle="bold"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/colorPrimaryDark" />
 
 </RelativeLayout>

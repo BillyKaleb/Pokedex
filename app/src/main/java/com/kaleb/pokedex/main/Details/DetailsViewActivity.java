@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -16,8 +18,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
+import com.kaleb.pokedex.data.model.Move_;
 
-public class DetailsViewActivity extends AppCompatActivity implements DetailsViewContract{
+import java.util.ArrayList;
+import java.util.List;
+
+public class DetailsViewActivity extends AppCompatActivity implements DetailsViewContract {
 
     private ImageView imageView;
     private TextView pokemonName, pokeType, pokeAbility, pokeFormNumber;
@@ -26,6 +32,9 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     private DetailsPreseter detailsPreseter;
     private RelativeLayout relativeLayout;
     private ProgressBar progressBar;
+    private MoveListAdapter moveListAdapter;
+    private List<Move_> arrayMove;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,7 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         Toast.makeText(this, value, Toast.LENGTH_SHORT).show();
 
         detailsPreseter = new DetailsPreseter(this, PokedexApplication.getRemoteRepository());
+        arrayMove = new ArrayList<>();
         imageView = findViewById(R.id.imageDetail);
         pokemonName = findViewById(R.id.pokemonNameDetails);
         pokeType = findViewById(R.id.typesDetail);
@@ -49,13 +59,14 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         moveList = findViewById(R.id.moveList);
         relativeLayout = findViewById(R.id.detailsLayout);
         progressBar = findViewById(R.id.itemProgressBar);
+        listView = findViewById(R.id.moveList);
 
         detailsPreseter.getPokemonDetails(value);
 
     }
 
     @Override
-    public void setPokemonDetails(String name, String img, String type, String ability, int form) {
+    public void setPokemonDetails(String name, String img, String type, String ability, int form, List<Move_> moveList) {
         Glide
                 .with(imageView.getContext())
                 .load(img)
@@ -66,6 +77,10 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         pokeType.setText(type);
         pokeAbility.setText(ability);
 //        pokeFormNumber.setText(form);
+        arrayMove = moveList;
+        moveListAdapter = new MoveListAdapter(this, arrayMove);
+        Log.d("TAG", "setPokemonDetails: " + arrayMove.size());
+        listView.setAdapter(moveListAdapter);
     }
 
     @Override
@@ -74,7 +89,7 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     }
 
     @Override
-    public void showLayout(Boolean showLayout){
+    public void showLayout(Boolean showLayout) {
         relativeLayout.setVisibility(showLayout ? View.VISIBLE : View.GONE);
     }
 
