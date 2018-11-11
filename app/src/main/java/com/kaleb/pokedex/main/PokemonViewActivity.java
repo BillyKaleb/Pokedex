@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
 
@@ -63,17 +64,19 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
 
     @Override
     public void showPokemon(String pokemonName, String pokemonImg, Boolean showLayout) {
-        relativeLayout.setVisibility(showLayout? View.VISIBLE: View.GONE);
+        relativeLayout.setVisibility(showLayout ? View.VISIBLE : View.GONE);
         Glide
                 .with(imageView.getContext())
                 .load(pokemonImg)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.ic_img_placeholders))
                 .into(imageView);
         textView.setText(pokemonName);
     }
 
     @Override
     public void showLoading(Boolean showLoading) {
-        progressBar.setVisibility(showLoading? View.VISIBLE: View.GONE);
+        progressBar.setVisibility(showLoading ? View.VISIBLE : View.GONE);
     }
 
     @Override
