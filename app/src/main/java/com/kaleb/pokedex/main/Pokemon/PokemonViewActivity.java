@@ -92,7 +92,9 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         backListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                resultList.clear();
                 recyclerAdapter.cleanList();
+                endlessRecyclerViewOnScrollListener.resetListener();
                 pokemonPresenter.getFullPokemonList();
             }
         });
