@@ -42,20 +42,9 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         editText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (event != null) {
-                    // if shift key is down, then we want to insert the '\n' char in the TextView;
-                    // otherwise, the default action is to send the message.
-                    if (!event.isShiftPressed()) {
-                        String inputResult = editText.getText().toString();
-                        closeKeyboard();
-                        showToast(inputResult);
-                        return true;
-                    }
-                    return false;
-                }
                 String inputResult = editText.getText().toString();
                 closeKeyboard();
-                showToast(inputResult);
+                pokemonPresenter.getPokemonName(inputResult);
                 return true;
             }
         });
