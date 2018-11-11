@@ -24,6 +24,7 @@ public class DetailsPreseter implements DetailsPresenterContract {
 
     @Override
     public void getPokemonDetails(String name) {
+        view.showProgressBar(true);
         remoteRepository.getPokemonString(name).enqueue(new Callback<PokemonDetailsResponse>() {
             @Override
             public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
@@ -44,7 +45,8 @@ public class DetailsPreseter implements DetailsPresenterContract {
                 } else {
                     view.showToast(String.valueOf(response.code()) + " error!");
                 }
-//                view.showLoading(false);
+                view.showProgressBar(false);
+                view.showLayout(true);
             }
 
             @Override
@@ -68,6 +70,7 @@ public class DetailsPreseter implements DetailsPresenterContract {
             sb.append(", ");
         }
         sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length()-1);
         return types = sb.toString();
     }
 
@@ -78,6 +81,7 @@ public class DetailsPreseter implements DetailsPresenterContract {
             sb.append(str.toString());
             sb.append(", ");
         }
+        sb.deleteCharAt(sb.length()-1);
         sb.deleteCharAt(sb.length()-1);
         return abilities = sb.toString();
     }

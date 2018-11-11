@@ -4,11 +4,16 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
 
@@ -19,6 +24,8 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     private TextView types, abilities, formNumber, moves;
     private ListView moveList;
     private DetailsPreseter detailsPreseter;
+    private RelativeLayout relativeLayout;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +47,8 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         formNumber = findViewById(R.id.form);
         moves = findViewById(R.id.move);
         moveList = findViewById(R.id.moveList);
+        relativeLayout = findViewById(R.id.detailsLayout);
+        progressBar = findViewById(R.id.itemProgressBar);
 
         detailsPreseter.getPokemonDetails(value);
 
@@ -47,6 +56,7 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
 
     @Override
     public void setPokemonDetails(String name, String img, String type, String ability, int form) {
+
         pokemonName.setText(name);
         pokeType.setText(type);
         pokeAbility.setText(ability);
@@ -56,5 +66,15 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     @Override
     public void showToast(String toast) {
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLayout(Boolean showLayout){
+        relativeLayout.setVisibility(showLayout ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showProgressBar(Boolean show) {
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 }
