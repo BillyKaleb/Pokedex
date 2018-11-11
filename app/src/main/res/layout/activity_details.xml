@@ -26,20 +26,12 @@
         android:textAlignment="center"
         android:textSize="25dp" />
 
-    <TextView
-        android:id="@+id/pokemonDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pokemonNameDetails"
-        android:layout_margin="16dp"
-        android:background="#ffffff"
-        android:text="DESCRIPTION asdiasjidsajlidasil disaljdilasjdilsaj dlasjdilsajild asjildjsaildjaslidjsailjdilsajdlias" />
-
     <ScrollView
         android:background="@drawable/rectangle_general"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pokemonDescription">
+        android:layout_below="@id/pokemonNameDetails"
+        android:layout_marginTop="16dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
