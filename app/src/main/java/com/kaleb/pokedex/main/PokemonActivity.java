@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.util.ByteBufferUtil;
+import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
 
 public class PokemonActivity extends AppCompatActivity implements PokemonContract{
@@ -18,12 +19,14 @@ public class PokemonActivity extends AppCompatActivity implements PokemonContrac
     private Button button;
     private ImageView imageView;
     private TextView textView;
+    private PokemonPresenter pokemonPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon);
 
+        pokemonPresenter = new PokemonPresenter(this, PokedexApplication.getRemoteRepository());
         relativeLayout = findViewById(R.id.relativeLayoutClick);
         editText = findViewById(R.id.editTextPokemon);
         button = findViewById(R.id.buttonPokemon);
