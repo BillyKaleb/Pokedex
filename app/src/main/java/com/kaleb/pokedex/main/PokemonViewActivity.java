@@ -2,6 +2,8 @@ package com.kaleb.pokedex.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,6 +34,15 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         button = findViewById(R.id.buttonPokemon);
         imageView = findViewById(R.id.imageViewPokemon);
         textView = findViewById(R.id.pokemonName);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String inputResult = editText.getText().toString();
+                closeKeyboard();
+                showToast(inputResult);
+            }
+        });
     }
 
     @Override
@@ -46,6 +57,15 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
 
     @Override
     public void showToast(String toast) {
+        Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+    }
 
+    public void closeKeyboard(){
+        try {
+            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+
+        }
     }
 }
