@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
     private Button button;
     private ImageView imageView;
     private TextView textView;
+    private ProgressBar progressBar;
     private PokemonPresenter pokemonPresenter;
 
     @Override
@@ -35,6 +37,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         button = findViewById(R.id.buttonPokemon);
         imageView = findViewById(R.id.imageViewPokemon);
         textView = findViewById(R.id.pokemonName);
+        progressBar = findViewById(R.id.itemProgressBar);
 
         editText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
@@ -75,7 +78,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
 
     @Override
     public void showLoading(Boolean showLoading) {
-
+        progressBar.setVisibility(showLoading? View.VISIBLE: View.GONE);
     }
 
     @Override

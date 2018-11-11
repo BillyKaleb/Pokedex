@@ -22,36 +22,55 @@ public class PokemonPresenter implements PokemonPresenterContract {
 
     @Override
     public void getPokemonName(String name) {
-        try {
-            int id = Integer.parseInt(name);
-            remoteRepository.getPokemonInt(id).enqueue(new Callback<PokemonDetailsResponse>() {
-                @Override
-                public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
-                    view.showToast("Found a pokemon with that ID!");
-                    view.showLoading(false);
-                }
+        if (name != null && !name.trim().equals("")) {
+            view.showLoading(true);
+            try {
+                int id = Integer.parseInt(name);
+                remoteRepository.getPokemonInt(id).enqueue(new Callback<PokemonDetailsResponse>() {
+                    @Override
+                    public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
+                        if (response.code() == 200) {
+                            view.showPokemon(response.body().getName(), response.body().getSprites().getFrontDefault(), true);
+                            view.showToast("Found a pokemon with that ID!");
+                        } else if (response.code() == 404) {
+                            view.showToast("There's no Pokemon with that Name");
+                        } else {
+                            view.showToast(String.valueOf(response.code()) + " error!");
+                        }
+                        view.showLoading(false);
+                    }
 
-                @Override
-                public void onFailure(Call<PokemonDetailsResponse> call, Throwable t) {
-                    view.showToast("There's no Pokemon with that ID");
-                    view.showLoading(false);
-                }
-            });
+                    @Override
+                    public void onFailure(Call<PokemonDetailsResponse> call, Throwable t) {
+                        view.showToast("There's no Pokemon with that ID");
+                        view.showLoading(false);
+                    }
+                });
 
-        } catch (NumberFormatException nfe) {
-            remoteRepository.getPokemonString(name).enqueue(new Callback<PokemonDetailsResponse>() {
-                @Override
-                public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
-                    view.showToast("Found a pokemon with that Name!");
-                    view.showLoading(false);
-                }
+            } catch (NumberFormatException nfe) {
+                remoteRepository.getPokemonString(name).enqueue(new Callback<PokemonDetailsResponse>() {
+                    @Override
+                    public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
+                        if (response.code() == 200) {
+                            view.showPokemon(response.body().getName(), response.body().getSprites().getFrontDefault(), true);
+                            view.showToast("Found a pokemon with that ID!");
+                        } else if (response.code() == 404) {
+                            view.showToast("There's no Pokemon with that Name");
+                        } else {
+                            view.showToast(String.valueOf(response.code()) + " error!");
+                        }
+                        view.showLoading(false);
+                    }
 
-                @Override
-                public void onFailure(Call<PokemonDetailsResponse> call, Throwable t) {
-                    view.showToast("There's no Pokemon with that Name");
-                    view.showLoading(false);
-                }
-            });
+                    @Override
+                    public void onFailure(Call<PokemonDetailsResponse> call, Throwable t) {
+                        view.showToast("There's no Pokemon with that Name");
+                        view.showLoading(false);
+                    }
+                });
+            }
+        } else {
+            view.showToast("Please type in something first");
         }
     }
 }
