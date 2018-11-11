@@ -56,7 +56,12 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
 
     @Override
     public void setPokemonDetails(String name, String img, String type, String ability, int form) {
-
+        Glide
+                .with(imageView.getContext())
+                .load(img)
+                .apply(new RequestOptions()
+                        .placeholder(R.drawable.ic_img_placeholders))
+                .into(imageView);
         pokemonName.setText(name);
         pokeType.setText(type);
         pokeAbility.setText(ability);
