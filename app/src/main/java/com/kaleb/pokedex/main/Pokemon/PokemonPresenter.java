@@ -108,6 +108,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
         for (int x = 20; x > 0; x--) {
             showResultList.add(allResultList.get(page - x));
         }
+        view.showLoading(false);
         view.addPokemonResults(showResultList);
     }
 

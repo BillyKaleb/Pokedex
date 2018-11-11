@@ -90,6 +90,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
     @Override
     public void showPokemon(String pokemonName, String pokemonImg, Boolean showLayout) {
         relativeLayout.setVisibility(showLayout ? View.VISIBLE : View.GONE);
+        recyclerView.setVisibility(showLayout ? View.GONE : View.VISIBLE);
         Glide
                 .with(imageView.getContext())
                 .load(pokemonImg)
