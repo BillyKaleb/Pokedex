@@ -1,5 +1,6 @@
 package com.kaleb.pokedex.main.Pokemon;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +23,7 @@ import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
 import com.kaleb.pokedex.RecyclerAdapter;
 import com.kaleb.pokedex.data.model.Result;
+import com.kaleb.pokedex.main.Details.DetailsViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +101,12 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
             }
         });
 
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pokemonPresenter.onPokemonClick(textView.getText().toString());
+            }
+        });
     }
 
     @Override
@@ -135,6 +143,13 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
     @Override
     public void showToast(String toast) {
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void openDetailsActivity(String name) {
+        Intent myIntent = new Intent(PokemonViewActivity.this, DetailsViewActivity.class);
+        myIntent.putExtra("url", name); //Optional parameters
+        PokemonViewActivity.this.startActivity(myIntent);
     }
 
     public void closeKeyboard() {

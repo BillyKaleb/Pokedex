@@ -41,7 +41,6 @@ public class PokemonPresenter implements PokemonPresenterContract {
                         if (response.code() == 200) {
                             caps = capitalizeText(response.body().getName());
                             view.showPokemon(caps, response.body().getSprites().getFrontDefault(), true);
-                            view.showToast("Found a pokemon with that ID!");
                         } else if (response.code() == 404) {
                             view.showToast("There's no Pokemon with that ID");
                         } else {
@@ -64,7 +63,6 @@ public class PokemonPresenter implements PokemonPresenterContract {
                         if (response.code() == 200) {
                             caps = capitalizeText(response.body().getName());
                             view.showPokemon(caps, response.body().getSprites().getFrontDefault(), true);
-                            view.showToast("Found a pokemon with that name!");
                         } else if (response.code() == 404) {
                             view.showToast("There's no Pokemon with that name");
                         } else {
@@ -122,6 +120,11 @@ public class PokemonPresenter implements PokemonPresenterContract {
                 pageCounter++;
             }
         }, 2000);
+    }
+
+    @Override
+    public void onPokemonClick(String name) {
+        view.openDetailsActivity(name);
     }
 
     String capitalizeText(String text) {
