@@ -1,8 +1,5 @@
-package com.kaleb.pokedex.main;
+package com.kaleb.pokedex.main.Pokemon;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
 import com.kaleb.pokedex.data.RemoteRepository;
 import com.kaleb.pokedex.data.response.PokemonDetailsResponse;
 

@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main;
+package com.kaleb.pokedex.main.Pokemon;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

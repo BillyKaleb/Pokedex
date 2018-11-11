@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main;
+package com.kaleb.pokedex.main.Pokemon;
 
 public interface PokemonViewContract {
     void showPokemon(String pokemonName, String pokemonImg, Boolean showLayout);
