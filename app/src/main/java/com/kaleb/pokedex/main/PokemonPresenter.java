@@ -14,6 +14,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
 
     private PokemonViewContract view;
     private RemoteRepository remoteRepository;
+    private String caps;
 
     public PokemonPresenter(PokemonViewContract pokemonViewContract, RemoteRepository remoteRepository) {
         this.view = pokemonViewContract;
@@ -30,7 +31,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
                     @Override
                     public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
                         if (response.code() == 200) {
-                            view.showPokemon(response.body().getName(), response.body().getSprites().getFrontDefault(), true);
+                            caps = capitalizeText(response.body().getName());
+                            view.showPokemon(caps, response.body().getSprites().getFrontDefault(), true);
                             view.showToast("Found a pokemon with that ID!");
                         } else if (response.code() == 404) {
                             view.showToast("There's no Pokemon with that Name");
@@ -52,7 +54,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
                     @Override
                     public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
                         if (response.code() == 200) {
-                            view.showPokemon(response.body().getName(), response.body().getSprites().getFrontDefault(), true);
+                            caps = capitalizeText(response.body().getName());
+                            view.showPokemon(caps, response.body().getSprites().getFrontDefault(), true);
                             view.showToast("Found a pokemon with that ID!");
                         } else if (response.code() == 404) {
                             view.showToast("There's no Pokemon with that Name");
@@ -72,5 +75,10 @@ public class PokemonPresenter implements PokemonPresenterContract {
         } else {
             view.showToast("Please type in something first");
         }
+    }
+
+    String capitalizeText(String text){
+        text = text.substring(0, 1).toUpperCase() + text.substring(1);
+        return text;
     }
 }
