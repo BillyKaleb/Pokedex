@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
 
@@ -62,7 +63,12 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
 
     @Override
     public void showPokemon(String pokemonName, String pokemonImg, Boolean showLayout) {
-
+        relativeLayout.setVisibility(showLayout? View.VISIBLE: View.GONE);
+        Glide
+                .with(imageView.getContext())
+                .load(pokemonImg)
+                .into(imageView);
+        textView.setText(pokemonName);
     }
 
     @Override
