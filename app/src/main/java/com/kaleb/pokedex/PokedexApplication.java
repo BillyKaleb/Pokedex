@@ -2,8 +2,8 @@ package com.kaleb.pokedex;
 
 import android.app.Application;
 
-import com.kaleb.pokedex.data.response.PokedexService;
-import com.kaleb.pokedex.data.response.RemoteRepository;
+import com.kaleb.pokedex.data.PokedexService;
+import com.kaleb.pokedex.data.RemoteRepository;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
