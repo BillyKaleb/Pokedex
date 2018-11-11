@@ -1,5 +1,6 @@
 package com.kaleb.pokedex;
 
+import android.content.Intent;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.kaleb.pokedex.data.model.Result;
+import com.kaleb.pokedex.main.Details.DetailsViewActivity;
+import com.kaleb.pokedex.main.Pokemon.PokemonViewActivity;
 
 import java.util.List;
 
@@ -28,6 +31,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.textView.setText(myList.get(position).getName());
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(v.getContext(), DetailsViewActivity.class);
+                myIntent.putExtra("url", myList.get(position).getName()); //Optional parameters
+                v.getContext().startActivity(myIntent);
+            }
+        });
     }
 
     @Override
