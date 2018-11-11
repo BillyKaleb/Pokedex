@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp">
 
@@ -17,16 +17,22 @@
             android:id="@+id/editTextPokemon"
             android:singleLine="true"
             android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_edit_text"
             android:digits="abcdefghijklmnopqrstuvwxyz1234567890 "
+            android:hint="Put in ID / Name"
+            android:paddingLeft="16dp"
+            android:textSize="23dp"
             android:imeOptions="actionDone"/>
 
         <Button
             android:id="@+id/buttonPokemon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_alignTop="@id/editTextPokemon"
             android:layout_toRightOf="@id/editTextPokemon"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/colorWhite"
             android:text="Look it up!" />
     </RelativeLayout>
 
@@ -44,6 +50,7 @@
             android:id="@+id/imageViewPokemon"
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:background="@drawable/rectangle_general"
             android:layout_centerHorizontal="true" />
 
         <TextView
@@ -55,6 +62,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:text="PokemonName"
+            android:textStyle="bold"
             android:textSize="25dp" />
     </RelativeLayout>
 
