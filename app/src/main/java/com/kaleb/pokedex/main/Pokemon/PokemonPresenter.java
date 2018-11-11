@@ -87,6 +87,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
 
     @Override
     public void getFullPokemonList() {
+        view.showAllPokemonList(true);
         view.showLoading(true);
         remoteRepository.getPokemonList().enqueue(new Callback<PokemonResponse>() {
             @Override

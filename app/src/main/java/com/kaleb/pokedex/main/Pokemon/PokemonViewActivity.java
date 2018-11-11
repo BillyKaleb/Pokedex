@@ -89,11 +89,26 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
             }
         });
 
+        backListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerAdapter.cleanList();
+                pokemonPresenter.getFullPokemonList();
+            }
+        });
+
     }
 
     @Override
     public void addPokemonResults(List<Result> results) {
         recyclerAdapter.addList(results);
+    }
+
+    @Override
+    public void showAllPokemonList(Boolean showLayout) {
+        relativeLayout.setVisibility(showLayout ? View.GONE : View.VISIBLE);
+        backListButton.setVisibility(showLayout ? View.GONE : View.VISIBLE);
+        recyclerView.setVisibility(showLayout ? View.VISIBLE : View.GONE);
     }
 
     @Override
