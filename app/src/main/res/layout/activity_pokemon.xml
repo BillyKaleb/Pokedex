@@ -76,7 +76,9 @@
         android:background="@drawable/rounded_button"
         android:textColor="@color/colorWhite"
         android:visibility="gone"
-        android:text="< Get back to list"/>
+        android:layout_marginTop="50dp"
+        android:padding="5dp"
+        android:text="Get back to list"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
