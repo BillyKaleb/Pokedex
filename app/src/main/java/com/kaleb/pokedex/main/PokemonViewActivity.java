@@ -62,7 +62,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
             public void onClick(View v) {
                 String inputResult = editText.getText().toString();
                 closeKeyboard();
-                showToast(inputResult);
+                pokemonPresenter.getPokemonName(inputResult);
             }
         });
 

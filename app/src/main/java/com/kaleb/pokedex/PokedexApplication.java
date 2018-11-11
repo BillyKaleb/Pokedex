@@ -23,7 +23,7 @@ public class PokedexApplication extends Application {
 
     public void apiNetwork() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://pokeapi.co/api/v2/")
+                .baseUrl("https://pokeapi.co/api/v2/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         pokedexService = retrofit.create(PokedexService.class);
