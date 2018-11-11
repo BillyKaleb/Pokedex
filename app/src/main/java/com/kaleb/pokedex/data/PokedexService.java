@@ -1,6 +1,7 @@
 package com.kaleb.pokedex.data;
 
 import com.kaleb.pokedex.data.response.PokemonDetailsResponse;
+import com.kaleb.pokedex.data.response.PokemonResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,4 +14,7 @@ public interface PokedexService {
 
     @GET("pokemon/{pokemon}")
     Call<PokemonDetailsResponse> pokemonInt(@Path("pokemon") int pokemonId);
+
+    @GET("pokemon")
+    Call<PokemonResponse> pokemonList();
 }
