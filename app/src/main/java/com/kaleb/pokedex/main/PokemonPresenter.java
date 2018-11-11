@@ -35,7 +35,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
                             view.showPokemon(caps, response.body().getSprites().getFrontDefault(), true);
                             view.showToast("Found a pokemon with that ID!");
                         } else if (response.code() == 404) {
-                            view.showToast("There's no Pokemon with that Name");
+                            view.showToast("There's no Pokemon with that ID");
                         } else {
                             view.showToast(String.valueOf(response.code()) + " error!");
                         }
@@ -56,9 +56,9 @@ public class PokemonPresenter implements PokemonPresenterContract {
                         if (response.code() == 200) {
                             caps = capitalizeText(response.body().getName());
                             view.showPokemon(caps, response.body().getSprites().getFrontDefault(), true);
-                            view.showToast("Found a pokemon with that ID!");
+                            view.showToast("Found a pokemon with that name!");
                         } else if (response.code() == 404) {
-                            view.showToast("There's no Pokemon with that Name");
+                            view.showToast("There's no Pokemon with that name");
                         } else {
                             view.showToast(String.valueOf(response.code()) + " error!");
                         }
@@ -67,7 +67,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
 
                     @Override
                     public void onFailure(Call<PokemonDetailsResponse> call, Throwable t) {
-                        view.showToast("There's no Pokemon with that Name");
+                        view.showToast("There's no Pokemon with that name");
                         view.showLoading(false);
                     }
                 });
