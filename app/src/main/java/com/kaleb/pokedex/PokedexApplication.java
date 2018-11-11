@@ -10,8 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PokedexApplication extends Application {
 
-    private PokedexService pokedexService;
-    private RemoteRepository remoteRepository;
+    private static PokedexService pokedexService;
+    private static RemoteRepository remoteRepository;
 
     @Override
     public void onCreate() {
@@ -29,11 +29,11 @@ public class PokedexApplication extends Application {
         pokedexService = retrofit.create(PokedexService.class);
     }
 
-    public PokedexService getPokedexService() {
+    public static PokedexService getPokedexService() {
         return pokedexService;
     }
 
-    public RemoteRepository getRemoteRepository() {
+    public static RemoteRepository getRemoteRepository() {
         return remoteRepository;
     }
 }
