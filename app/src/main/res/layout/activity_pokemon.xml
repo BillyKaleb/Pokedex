@@ -29,6 +29,7 @@
             android:id="@+id/buttonPokemon"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
             android:layout_alignTop="@id/editTextPokemon"
             android:layout_toRightOf="@id/editTextPokemon"
             android:background="@drawable/rounded_button"
@@ -65,6 +66,17 @@
             android:textStyle="bold"
             android:textSize="25dp" />
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/backToList"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@id/relativeLayoutClick"
+        android:layout_alignLeft="@id/relativeLayout1"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/colorWhite"
+        android:visibility="gone"
+        android:text="< Get back to list"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"

@@ -30,7 +30,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
 
     private RelativeLayout relativeLayout;
     private EditText editText;
-    private Button button;
+    private Button button, backListButton;
     private ImageView imageView;
     private TextView textView;
     private ProgressBar progressBar;
@@ -49,6 +49,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         relativeLayout = findViewById(R.id.relativeLayoutClick);
         editText = findViewById(R.id.editTextPokemon);
         button = findViewById(R.id.buttonPokemon);
+        backListButton = findViewById(R.id.backToList);
         imageView = findViewById(R.id.imageViewPokemon);
         textView = findViewById(R.id.pokemonName);
         progressBar = findViewById(R.id.itemProgressBar);
@@ -98,6 +99,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
     @Override
     public void showPokemon(String pokemonName, String pokemonImg, Boolean showLayout) {
         relativeLayout.setVisibility(showLayout ? View.VISIBLE : View.GONE);
+        backListButton.setVisibility(showLayout ? View.VISIBLE : View.GONE);
         recyclerView.setVisibility(showLayout ? View.GONE : View.VISIBLE);
         Glide
                 .with(imageView.getContext())
