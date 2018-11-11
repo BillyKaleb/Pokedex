@@ -7,12 +7,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.util.ByteBufferUtil;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
 
-public class PokemonActivity extends AppCompatActivity implements PokemonContract{
+public class PokemonViewActivity extends AppCompatActivity implements PokemonViewContract {
 
     private RelativeLayout relativeLayout;
     private EditText editText;
