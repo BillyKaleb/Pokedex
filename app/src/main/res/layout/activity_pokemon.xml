@@ -66,6 +66,15 @@
             android:textSize="25dp" />
     </RelativeLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeLayout1"
+        android:layout_above="@+id/itemProgressBar"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="15dp" />
+
     <ProgressBar
         android:id="@+id/itemProgressBar"
         android:layout_width="30dp"

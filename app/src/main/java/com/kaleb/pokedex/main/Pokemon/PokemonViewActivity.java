@@ -2,6 +2,7 @@ package com.kaleb.pokedex.main.Pokemon;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -27,6 +28,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
     private TextView textView;
     private ProgressBar progressBar;
     private PokemonPresenter pokemonPresenter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         imageView = findViewById(R.id.imageViewPokemon);
         textView = findViewById(R.id.pokemonName);
         progressBar = findViewById(R.id.itemProgressBar);
+        recyclerView = findViewById(R.id.recyclerView);
 
         editText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
