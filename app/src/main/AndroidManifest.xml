@@ -22,7 +22,8 @@
         <activity
             android:name=".main.Details.MainActivity"
             android:label="@string/title_activity_main" />
-        <activity android:name=".main.Details.DetailsViewActivity"></activity>
+        <activity android:name=".main.Details.DetailsViewActivity" />
+        <activity android:name=".main.Details.MoveListAdapter"></activity>
     </application>
 
 </manifest>
