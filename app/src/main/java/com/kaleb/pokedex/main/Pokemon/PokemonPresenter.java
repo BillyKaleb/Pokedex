@@ -19,7 +19,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
 
     private PokemonViewContract view;
     private RemoteRepository remoteRepository;
-    private String caps;
+    private String caps, nameUrl;
     private List<Result> allResultList;
     private List<Result> showResultList = new ArrayList<>();
     private static int pageCounter;
@@ -39,6 +39,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
                     @Override
                     public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
                         if (response.code() == 200) {
+                            nameUrl = response.body().getName();
                             caps = capitalizeText(response.body().getName());
                             view.showPokemon(caps, response.body().getSprites().getFrontDefault(), true);
                         } else if (response.code() == 404) {
@@ -61,6 +62,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
                     @Override
                     public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
                         if (response.code() == 200) {
+                            nameUrl = response.body().getName();
                             caps = capitalizeText(response.body().getName());
                             view.showPokemon(caps, response.body().getSprites().getFrontDefault(), true);
                         } else if (response.code() == 404) {
@@ -124,7 +126,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
 
     @Override
     public void onPokemonClick(String name) {
-        view.openDetailsActivity(name);
+        view.openDetailsActivity(nameUrl);
     }
 
     String capitalizeText(String text) {
