@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.Pokemon.PokemonViewActivity">
+        <activity android:name=".main.Pokemon.Activity.PokemonViewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,7 @@
         <activity
             android:name=".main.Details.MainActivity"
             android:label="@string/title_activity_main" />
-        <activity android:name=".main.Details.DetailsViewActivity" />
+        <activity android:name=".main.Details.Activity.DetailsViewActivity" />
         <activity android:name=".main.Details.MoveListAdapter" />
         <activity android:name=".main.Details.FormListAdapter"></activity>
     </application>

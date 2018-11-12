@@ -1,4 +1,4 @@
-package com.kaleb.pokedex;
+package com.kaleb.pokedex.main.Pokemon;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

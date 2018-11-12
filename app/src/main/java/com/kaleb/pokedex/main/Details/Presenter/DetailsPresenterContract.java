@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main.Details;
+package com.kaleb.pokedex.main.Details.Presenter;
 
 import com.kaleb.pokedex.data.response.PokemonDetailsResponse;
 

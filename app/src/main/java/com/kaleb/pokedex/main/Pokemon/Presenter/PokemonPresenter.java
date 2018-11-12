@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main.Pokemon;
+package com.kaleb.pokedex.main.Pokemon.Presenter;
 
 import android.os.Handler;
 import android.util.Log;
@@ -7,6 +7,7 @@ import com.kaleb.pokedex.data.RemoteRepository;
 import com.kaleb.pokedex.data.model.Result;
 import com.kaleb.pokedex.data.response.PokemonDetailsResponse;
 import com.kaleb.pokedex.data.response.PokemonResponse;
+import com.kaleb.pokedex.main.Pokemon.Activity.PokemonViewContract;
 
 import java.util.ArrayList;
 import java.util.List;

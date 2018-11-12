@@ -1,4 +1,4 @@
-package com.kaleb.pokedex;
+package com.kaleb.pokedex.main.Pokemon;
 
 import android.content.Intent;
 import android.support.v7.widget.AppCompatTextView;
@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.bumptech.glide.Glide;
+import com.kaleb.pokedex.R;
 import com.kaleb.pokedex.data.model.Result;
-import com.kaleb.pokedex.main.Details.DetailsViewActivity;
-import com.kaleb.pokedex.main.Pokemon.PokemonViewActivity;
+import com.kaleb.pokedex.main.Details.Activity.DetailsViewActivity;
 
 import java.util.List;
 

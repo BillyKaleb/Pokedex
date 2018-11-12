@@ -1,10 +1,9 @@
-package com.kaleb.pokedex.main.Details;
-
-import android.util.Log;
+package com.kaleb.pokedex.main.Details.Presenter;
 
 import com.kaleb.pokedex.data.RemoteRepository;
 import com.kaleb.pokedex.data.model.Move_;
 import com.kaleb.pokedex.data.response.PokemonDetailsResponse;
+import com.kaleb.pokedex.main.Details.Activity.DetailsViewContract;
 
 import java.util.ArrayList;
 import java.util.List;

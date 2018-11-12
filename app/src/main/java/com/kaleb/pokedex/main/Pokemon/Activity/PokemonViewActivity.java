@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main.Pokemon;
+package com.kaleb.pokedex.main.Pokemon.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -18,12 +18,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.kaleb.pokedex.EndlessRecyclerViewOnScrollListener;
+import com.kaleb.pokedex.main.Pokemon.EndlessRecyclerViewOnScrollListener;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
-import com.kaleb.pokedex.RecyclerAdapter;
+import com.kaleb.pokedex.main.Pokemon.RecyclerAdapter;
 import com.kaleb.pokedex.data.model.Result;
-import com.kaleb.pokedex.main.Details.DetailsViewActivity;
+import com.kaleb.pokedex.main.Details.Activity.DetailsViewActivity;
+import com.kaleb.pokedex.main.Pokemon.Presenter.PokemonPresenter;
 
 import java.util.ArrayList;
 import java.util.List;

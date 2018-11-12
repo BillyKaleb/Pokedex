@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main.Details;
+package com.kaleb.pokedex.main.Details.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +19,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.kaleb.pokedex.PokedexApplication;
 import com.kaleb.pokedex.R;
 import com.kaleb.pokedex.data.model.Move_;
+import com.kaleb.pokedex.main.Details.Presenter.DetailsPresenter;
+import com.kaleb.pokedex.main.Details.FormListAdapter;
+import com.kaleb.pokedex.main.Details.MoveListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

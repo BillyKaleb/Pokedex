@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main.Pokemon;
+package com.kaleb.pokedex.main.Pokemon.Activity;
 
 import com.kaleb.pokedex.data.model.Result;
 

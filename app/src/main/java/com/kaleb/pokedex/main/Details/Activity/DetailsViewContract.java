@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main.Details;
+package com.kaleb.pokedex.main.Details.Activity;
 
 import com.kaleb.pokedex.data.model.Move_;
 

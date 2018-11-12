@@ -1,4 +1,4 @@
-package com.kaleb.pokedex.main.Pokemon;
+package com.kaleb.pokedex.main.Pokemon.Presenter;
 
 public interface PokemonPresenterContract {
     void getPokemonName(String name);
