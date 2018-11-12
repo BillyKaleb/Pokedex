@@ -11,8 +11,8 @@
         android:id="@+id/itemProgressBar"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:visibility="gone" />
 
     <RelativeLayout
@@ -114,14 +114,22 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <ListView
-                    android:id="@+id/moveList"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/move"
-                    android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/move">
 
-                </ListView>
+                    <ListView
+                        android:id="@+id/moveList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                    </ListView>
+
+                </LinearLayout>
+
+
             </RelativeLayout>
         </ScrollView>
     </RelativeLayout>
