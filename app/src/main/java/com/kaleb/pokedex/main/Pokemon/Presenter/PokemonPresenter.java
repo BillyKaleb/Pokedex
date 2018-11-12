@@ -130,7 +130,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
         view.openDetailsActivity(nameUrl);
     }
 
-    String capitalizeText(String text) {
+    private String capitalizeText(String text) {
         text = text.substring(0, 1).toUpperCase() + text.substring(1);
         return text;
     }

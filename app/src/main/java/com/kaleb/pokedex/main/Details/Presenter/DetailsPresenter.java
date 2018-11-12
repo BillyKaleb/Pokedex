@@ -91,12 +91,12 @@ public class DetailsPresenter implements DetailsPresenterContract {
         view.setListHeight(formHeight, moveHeight);
     }
 
-    String capitalizeText(String text) {
+    private String capitalizeText(String text) {
         text = text.substring(0, 1).toUpperCase() + text.substring(1);
         return text;
     }
 
-    String typeBuilder(Response<PokemonDetailsResponse> response) {
+    private String typeBuilder(Response<PokemonDetailsResponse> response) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < response.body().getTypes().size(); i++) {
             String str = response.body().getTypes().get(i).getType().getName();
@@ -108,7 +108,7 @@ public class DetailsPresenter implements DetailsPresenterContract {
         return types = sb.toString();
     }
 
-    String abilityBuilder(Response<PokemonDetailsResponse> response) {
+    private String abilityBuilder(Response<PokemonDetailsResponse> response) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < response.body().getAbilities().size(); i++) {
             String str = response.body().getAbilities().get(i).getAbility().getName();

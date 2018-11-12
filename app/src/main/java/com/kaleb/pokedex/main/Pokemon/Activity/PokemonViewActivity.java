@@ -153,7 +153,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         PokemonViewActivity.this.startActivity(myIntent);
     }
 
-    public void closeKeyboard() {
+    private void closeKeyboard() {
         try {
             InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
