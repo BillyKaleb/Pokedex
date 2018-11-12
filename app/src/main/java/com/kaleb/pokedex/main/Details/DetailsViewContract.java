@@ -10,4 +10,5 @@ public interface DetailsViewContract {
     void showToast(String toast);
     void showLayout(Boolean showLayout);
     void showProgressBar(Boolean show);
+    void setListHeight(int form, int move);
 }

@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailsPreseter implements DetailsPresenterContract {
+public class DetailsPresenter implements DetailsPresenterContract {
 
     private RemoteRepository remoteRepository;
     private DetailsViewContract view;
@@ -24,7 +24,7 @@ public class DetailsPreseter implements DetailsPresenterContract {
     private List<String> form = new ArrayList<>();
 
 
-    public DetailsPreseter(DetailsViewContract view, RemoteRepository remoteRepository) {
+    public DetailsPresenter(DetailsViewContract view, RemoteRepository remoteRepository) {
         this.view = view;
         this.remoteRepository = remoteRepository;
 

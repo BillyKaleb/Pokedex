@@ -3,7 +3,6 @@ package com.kaleb.pokedex.main.Details;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,7 +27,7 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     private TextView pokemonName, pokeType, pokeAbility, pokeFormNumber;
     private TextView types, abilities, formNumber, moves;
     private ListView moveList;
-    private DetailsPreseter detailsPreseter;
+    private DetailsPresenter detailsPresenter;
     private RelativeLayout relativeLayout;
     private ProgressBar progressBar;
     private MoveListAdapter moveListAdapter;
@@ -45,7 +44,7 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         Intent intent = getIntent();
         String value = intent.getStringExtra("url");
 
-        detailsPreseter = new DetailsPreseter(this, PokedexApplication.getRemoteRepository());
+        detailsPresenter = new DetailsPresenter(this, PokedexApplication.getRemoteRepository());
         arrayMove = new ArrayList<>();
         arrayForm = new ArrayList<>();
         imageView = findViewById(R.id.imageDetail);
@@ -81,7 +80,7 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
             }
         });
 
-        detailsPreseter.getPokemonDetails(value);
+        detailsPresenter.getPokemonDetails(value);
 
     }
 
