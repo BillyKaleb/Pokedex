@@ -21,6 +21,7 @@ public class DetailsPreseter implements DetailsPresenterContract {
     private String types;
     private String abilities;
     private List<Move_> move = new ArrayList<>();
+    private List<String> form = new ArrayList<>();
 
 
     public DetailsPreseter(DetailsViewContract view, RemoteRepository remoteRepository) {
@@ -51,9 +52,12 @@ public class DetailsPreseter implements DetailsPresenterContract {
 
                     for (int i = 0; i < response.body().getMoves().size(); i++) {
                         move.add(response.body().getMoves().get(i).getMove());
-                        Log.d("TAG", "onResponse: " + move.size());
                     }
-                    view.setPokemonDetails(caps, response.body().getSprites().getFrontDefault(), types, abilities, response.body().getForms().size(), move);
+
+                    for (int i = 0; i < response.body().getForms().size(); i++) {
+                        form.add(response.body().getForms().get(i).getName());
+                    }
+                    view.setPokemonDetails(caps, response.body().getSprites().getFrontDefault(), types, abilities, response.body().getForms().size(), move, form);
                 } else {
                     view.showToast(String.valueOf(response.code()) + " error!");
                 }

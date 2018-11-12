@@ -1,13 +1,11 @@
 package com.kaleb.pokedex.main.Details;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -34,8 +32,10 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     private RelativeLayout relativeLayout;
     private ProgressBar progressBar;
     private MoveListAdapter moveListAdapter;
+    private FormListAdapter formListAdapter;
     private List<Move_> arrayMove;
-    private ListView listView;
+    private List<String> arrayForm;
+    private ListView moveListView, formListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,21 +47,31 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
 
         detailsPreseter = new DetailsPreseter(this, PokedexApplication.getRemoteRepository());
         arrayMove = new ArrayList<>();
+        arrayForm = new ArrayList<>();
         imageView = findViewById(R.id.imageDetail);
         pokemonName = findViewById(R.id.pokemonNameDetails);
         pokeType = findViewById(R.id.typesDetail);
         pokeAbility = findViewById(R.id.abilityDetail);
-        pokeFormNumber = findViewById(R.id.formNumber);
         types = findViewById(R.id.types);
         abilities = findViewById(R.id.ability);
         formNumber = findViewById(R.id.form);
         moves = findViewById(R.id.move);
-        moveList = findViewById(R.id.moveList);
         relativeLayout = findViewById(R.id.detailsLayout);
         progressBar = findViewById(R.id.itemProgressBar);
-        listView = findViewById(R.id.moveList);
+        moveListView = findViewById(R.id.moveList);
+        formListView = findViewById(R.id.formList);
 
-        listView.setOnTouchListener(new View.OnTouchListener() {
+        moveListView.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+        formListView.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -76,7 +86,7 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     }
 
     @Override
-    public void setPokemonDetails(String name, String img, String type, String ability, int form, List<Move_> moveList) {
+    public void setPokemonDetails(String name, String img, String type, String ability, int form, List<Move_> moveList, List<String> formList) {
         Glide
                 .with(imageView.getContext())
                 .load(img)
@@ -88,9 +98,11 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         pokeAbility.setText(ability);
 //        pokeFormNumber.setText(form);
         arrayMove = moveList;
+        arrayForm = formList;
         moveListAdapter = new MoveListAdapter(this, arrayMove);
-        Log.d("TAG", "setPokemonDetails: " + arrayMove.size());
-        listView.setAdapter(moveListAdapter);
+        moveListView.setAdapter(moveListAdapter);
+        formListAdapter = new FormListAdapter(this, arrayForm);
+        formListView.setAdapter(formListAdapter);
     }
 
     @Override

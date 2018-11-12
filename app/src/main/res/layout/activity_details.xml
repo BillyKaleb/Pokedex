@@ -93,28 +93,34 @@
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/formNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/form"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@id/form"
-                    android:text="1"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
+                <LinearLayout
+                    android:id="@+id/formLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/form">
+
+                    <ListView
+                        android:id="@+id/formList"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                    </ListView>
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/move"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/formNumber"
+                    android:layout_below="@id/formLinearLayout"
                     android:layout_marginTop="10dp"
                     android:text="Move List:"
                     android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <LinearLayout
+                    android:id="@+id/moveLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_below="@id/move">
