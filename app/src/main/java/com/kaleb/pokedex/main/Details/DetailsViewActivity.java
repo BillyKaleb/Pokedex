@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -35,6 +37,8 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     private List<Move_> arrayMove;
     private List<String> arrayForm;
     private ListView moveListView, formListView;
+    private LinearLayout formLayout, moveLayout;
+    private ViewGroup.LayoutParams formParams, moveParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,10 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         progressBar = findViewById(R.id.itemProgressBar);
         moveListView = findViewById(R.id.moveList);
         formListView = findViewById(R.id.formList);
+        formLayout = findViewById(R.id.formLinearLayout);
+        formParams = formLayout.getLayoutParams();
+        moveLayout = findViewById(R.id.moveLinearLayout);
+        moveParams = moveLayout.getLayoutParams();
 
         moveListView.setOnTouchListener(new View.OnTouchListener() {
             // Setting on Touch Listener for handling the touch inside ScrollView
@@ -117,5 +125,13 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     @Override
     public void showProgressBar(Boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setListHeight(int form, int move) {
+        formParams.height = form;
+        formLayout.setLayoutParams(formParams);
+        moveParams.height = move;
+        moveLayout.setLayoutParams(moveParams);
     }
 }

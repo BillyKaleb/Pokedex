@@ -57,6 +57,8 @@ public class DetailsPresenter implements DetailsPresenterContract {
                     for (int i = 0; i < response.body().getForms().size(); i++) {
                         form.add(response.body().getForms().get(i).getName());
                     }
+
+                    getListHeight(response);
                     view.setPokemonDetails(caps, response.body().getSprites().getFrontDefault(), types, abilities, response.body().getForms().size(), move, form);
                 } else {
                     view.showToast(String.valueOf(response.code()) + " error!");
@@ -68,9 +70,26 @@ public class DetailsPresenter implements DetailsPresenterContract {
             @Override
             public void onFailure(Call<PokemonDetailsResponse> call, Throwable t) {
                 view.showToast("There's no Pokemon with that ID");
-//                view.showLoading(false);
+                view.showProgressBar(false);
             }
         });
+    }
+
+    @Override
+    public void getListHeight(Response<PokemonDetailsResponse> response) {
+        int formHeight, moveHeight;
+        if (response.body().getForms().size() < 5){
+            formHeight = response.body().getForms().size() * 100;
+        } else {
+            formHeight = 500;
+        }
+
+        if (response.body().getMoves().size() < 5){
+            moveHeight = response.body().getMoves().size() * 100;
+        } else {
+            moveHeight = 500;
+        }
+        view.setListHeight(formHeight, moveHeight);
     }
 
     String capitalizeText(String text) {
