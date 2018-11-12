@@ -104,7 +104,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pokemonPresenter.onPokemonClick(textView.getText().toString());
+                pokemonPresenter.onPokemonClick();
             }
         });
     }

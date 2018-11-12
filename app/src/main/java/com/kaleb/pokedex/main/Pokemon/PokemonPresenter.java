@@ -125,7 +125,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
     }
 
     @Override
-    public void onPokemonClick(String name) {
+    public void onPokemonClick() {
         view.openDetailsActivity(nameUrl);
     }
 

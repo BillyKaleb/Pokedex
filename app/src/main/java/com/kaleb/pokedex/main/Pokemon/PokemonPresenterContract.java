@@ -4,5 +4,5 @@ public interface PokemonPresenterContract {
     void getPokemonName(String name);
     void getFullPokemonList();
     void showPokemonList();
-    void onPokemonClick(String name);
+    void onPokemonClick();
 }
