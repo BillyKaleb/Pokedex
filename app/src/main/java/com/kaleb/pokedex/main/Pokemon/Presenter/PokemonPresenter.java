@@ -105,6 +105,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
                     pageCounter = 1;
                     showPokemonList();
                 } else {
+                    view.showFailed(true);
                     view.showToast("Can't load the list! Try using VPN and restarting the apps");
                     view.showLoading(false);
                 }

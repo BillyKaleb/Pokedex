@@ -34,7 +34,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
     private RelativeLayout relativeLayout;
     private EditText editText;
     private Button button, backListButton;
-    private ImageView imageView;
+    private ImageView imageView, pokemonFailed;
     private TextView textView;
     private ProgressBar progressBar;
     private PokemonPresenter pokemonPresenter;
@@ -54,6 +54,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         button = findViewById(R.id.buttonPokemon);
         backListButton = findViewById(R.id.backToList);
         imageView = findViewById(R.id.imageViewPokemon);
+        pokemonFailed = findViewById(R.id.pokemonFailed);
         textView = findViewById(R.id.pokemonName);
         progressBar = findViewById(R.id.itemProgressBar);
         recyclerView = findViewById(R.id.recyclerView);
@@ -164,6 +165,11 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         } else {
             return true;
         }
+    }
+
+    @Override
+    public void showFailed(Boolean showLayout) {
+        pokemonFailed.setVisibility(showLayout ? View.VISIBLE : View.GONE);
     }
 
     private void closeKeyboard() {
