@@ -70,7 +70,6 @@ public class DetailsPresenter implements DetailsPresenterContract {
 
             @Override
             public void onFailure(Call<PokemonDetailsResponse> call, Throwable t) {
-                view.showToast("There's no Pokemon with that ID");
                 view.showProgressBar(false);
             }
         });

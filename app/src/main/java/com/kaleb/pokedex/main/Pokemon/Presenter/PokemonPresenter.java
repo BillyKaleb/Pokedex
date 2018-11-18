@@ -1,7 +1,6 @@
 package com.kaleb.pokedex.main.Pokemon.Presenter;
 
 import android.os.Handler;
-import android.util.Log;
 
 import com.kaleb.pokedex.data.RemoteRepository;
 import com.kaleb.pokedex.data.model.Result;
@@ -25,6 +24,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
     private List<Result> showResultList = new ArrayList<>();
     private static int pageCounter;
     private static int totalCount;
+    private Call<PokemonDetailsResponse> pokemonDetailsCall;
+    private Call<PokemonResponse> pokemonResponseCall;
 
     public PokemonPresenter(PokemonViewContract pokemonViewContract, RemoteRepository remoteRepository) {
         this.view = pokemonViewContract;
@@ -37,7 +38,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
             view.showLoading(true);
             try {
                 int id = Integer.parseInt(name);
-                remoteRepository.getPokemonInt(id).enqueue(new Callback<PokemonDetailsResponse>() {
+                pokemonDetailsCall = remoteRepository.getPokemonInt(id);
+                pokemonDetailsCall.enqueue(new Callback<PokemonDetailsResponse>() {
                     @Override
                     public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
                         if (response.code() == 200) {
@@ -60,7 +62,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
                 });
 
             } catch (NumberFormatException nfe) {
-                remoteRepository.getPokemonString(name).enqueue(new Callback<PokemonDetailsResponse>() {
+                pokemonDetailsCall = remoteRepository.getPokemonString(name);
+                pokemonDetailsCall.enqueue(new Callback<PokemonDetailsResponse>() {
                     @Override
                     public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
                         if (response.code() == 200) {
@@ -91,18 +94,25 @@ public class PokemonPresenter implements PokemonPresenterContract {
     public void getFullPokemonList() {
         view.showAllPokemonList(true);
         view.showLoading(true);
-        remoteRepository.getPokemonList().enqueue(new Callback<PokemonResponse>() {
+        pokemonResponseCall = remoteRepository.getPokemonList();
+        pokemonResponseCall.enqueue(new Callback<PokemonResponse>() {
             @Override
             public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
-                totalCount = response.body().getCount();
-                allResultList = new ArrayList<>(response.body().getResults());
-                pageCounter = 1;
-                showPokemonList();
+                if (response.body() != null) {
+                    totalCount = response.body().getCount();
+                    allResultList = new ArrayList<>(response.body().getResults());
+                    pageCounter = 1;
+                    showPokemonList();
+                } else {
+                    view.showToast("Can't load the list! Try using VPN and restarting the apps");
+                    view.showLoading(false);
+                }
+
             }
 
             @Override
             public void onFailure(Call<PokemonResponse> call, Throwable t) {
-
+                view.showToast("Can't load the list! Try using VPN and restarting the apps");
             }
         });
     }
@@ -111,7 +121,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
     public void showPokemonList() {
         view.showLoading(true);
         // +1 below added because pageCounter go inside this first before proceeding
-        if(pageCounter <= (totalCount / 20) + 1){
+        if (pageCounter <= (totalCount / 20) + 1) {
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
