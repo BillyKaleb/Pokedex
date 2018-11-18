@@ -11,4 +11,5 @@ public interface DetailsViewContract {
     void showLayout(Boolean showLayout);
     void showProgressBar(Boolean show);
     void setListHeight(int form, int move);
+    void stopLoading();
 }

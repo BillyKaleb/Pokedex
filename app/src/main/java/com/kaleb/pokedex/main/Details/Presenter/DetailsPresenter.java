@@ -21,6 +21,7 @@ public class DetailsPresenter implements DetailsPresenterContract {
     private String abilities;
     private List<Move_> move = new ArrayList<>();
     private List<String> form = new ArrayList<>();
+    private Call<PokemonDetailsResponse> remoteCall;
 
 
     public DetailsPresenter(DetailsViewContract view, RemoteRepository remoteRepository) {
@@ -32,7 +33,8 @@ public class DetailsPresenter implements DetailsPresenterContract {
     @Override
     public void getPokemonDetails(String name) {
         view.showProgressBar(true);
-        remoteRepository.getPokemonString(name).enqueue(new Callback<PokemonDetailsResponse>() {
+        remoteCall = remoteRepository.getPokemonString(name);
+        remoteCall.enqueue(new Callback<PokemonDetailsResponse>() {
             @Override
             public void onResponse(Call<PokemonDetailsResponse> call, Response<PokemonDetailsResponse> response) {
                 if (response.code() == 200) {
@@ -89,6 +91,11 @@ public class DetailsPresenter implements DetailsPresenterContract {
             moveHeight = 500;
         }
         view.setListHeight(formHeight, moveHeight);
+    }
+
+    @Override
+    public void stopAPILoading() {
+        remoteCall.cancel();
     }
 
     private String capitalizeText(String text) {

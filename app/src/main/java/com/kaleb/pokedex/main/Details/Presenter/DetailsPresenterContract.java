@@ -8,4 +8,5 @@ public interface DetailsPresenterContract {
 
     void getPokemonDetails(String name);
     void getListHeight(Response<PokemonDetailsResponse> response);
+    void stopAPILoading();
 }

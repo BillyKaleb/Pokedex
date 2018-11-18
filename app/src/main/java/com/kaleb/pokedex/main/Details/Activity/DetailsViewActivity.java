@@ -96,6 +96,12 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopLoading();
+    }
+
+    @Override
     public void setPokemonDetails(String name, String img, String type, String ability, int form, List<Move_> moveList, List<String> formList) {
         Glide
                 .with(imageView.getContext())
@@ -136,5 +142,10 @@ public class DetailsViewActivity extends AppCompatActivity implements DetailsVie
         formLayout.setLayoutParams(formParams);
         moveParams.height = move;
         moveLayout.setLayoutParams(moveParams);
+    }
+
+    @Override
+    public void stopLoading() {
+        detailsPresenter.stopAPILoading();
     }
 }
