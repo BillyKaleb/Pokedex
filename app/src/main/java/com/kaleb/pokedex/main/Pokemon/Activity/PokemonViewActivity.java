@@ -117,8 +117,6 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
 
     @Override
     public void showAllPokemonList(Boolean showLayout) {
-        relativeLayout.setVisibility(showLayout ? View.GONE : View.VISIBLE);
-        backListButton.setVisibility(showLayout ? View.GONE : View.VISIBLE);
         recyclerView.setVisibility(showLayout ? View.VISIBLE : View.GONE);
     }
 
@@ -151,6 +149,21 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
         Intent myIntent = new Intent(PokemonViewActivity.this, DetailsViewActivity.class);
         myIntent.putExtra("url", name); //Optional parameters
         PokemonViewActivity.this.startActivity(myIntent);
+    }
+
+    @Override
+    public void removeBigImage(Boolean showLayout) {
+        relativeLayout.setVisibility(showLayout ? View.GONE : View.VISIBLE);
+        backListButton.setVisibility(showLayout ? View.GONE : View.VISIBLE);
+    }
+
+    @Override
+    public boolean recyclerViewVisibility() {
+        if (recyclerView.getVisibility() != View.VISIBLE){
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private void closeKeyboard() {

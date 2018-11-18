@@ -34,6 +34,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
 
     @Override
     public void getPokemonName(String name) {
+        view.showAllPokemonList(false);
         if (name != null && !name.trim().equals("")) {
             view.showLoading(true);
             try {
@@ -92,8 +93,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
 
     @Override
     public void getFullPokemonList() {
-        view.showAllPokemonList(true);
         view.showLoading(true);
+        view.removeBigImage(true);
         pokemonResponseCall = remoteRepository.getPokemonList();
         pokemonResponseCall.enqueue(new Callback<PokemonResponse>() {
             @Override
@@ -126,6 +127,9 @@ public class PokemonPresenter implements PokemonPresenterContract {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    if (!view.recyclerViewVisibility()){
+                        view.showAllPokemonList(true);
+                    }
                     showResultList.clear();
                     int page = pageCounter * 20;
                     for (int x = 20; x > 0; x--) {

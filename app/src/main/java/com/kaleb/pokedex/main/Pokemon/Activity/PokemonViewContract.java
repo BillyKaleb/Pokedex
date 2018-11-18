@@ -11,4 +11,6 @@ public interface PokemonViewContract {
     void showLoading(Boolean showLoading);
     void showToast(String toast);
     void openDetailsActivity(String name);
+    void removeBigImage(Boolean showLayout);
+    boolean recyclerViewVisibility();
 }
