@@ -31,9 +31,9 @@ import java.util.List;
 
 public class PokemonViewActivity extends AppCompatActivity implements PokemonViewContract {
 
-    private RelativeLayout relativeLayout;
+    private RelativeLayout relativeLayout, errorLayout;
     private EditText editText;
-    private Button button, backListButton;
+    private Button button, backListButton, refreshButton;
     private ImageView imageView, pokemonFailed;
     private TextView textView;
     private ProgressBar progressBar;
@@ -50,9 +50,11 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
 
         pokemonPresenter = new PokemonPresenter(this, PokedexApplication.getRemoteRepository());
         relativeLayout = findViewById(R.id.relativeLayoutClick);
+        errorLayout = findViewById(R.id.errorLayout);
         editText = findViewById(R.id.editTextPokemon);
         button = findViewById(R.id.buttonPokemon);
         backListButton = findViewById(R.id.backToList);
+        refreshButton = findViewById(R.id.buttonRefresh);
         imageView = findViewById(R.id.imageViewPokemon);
         pokemonFailed = findViewById(R.id.pokemonFailed);
         textView = findViewById(R.id.pokemonName);
@@ -99,6 +101,14 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
                 resultList.clear();
                 recyclerAdapter.cleanList();
                 endlessRecyclerViewOnScrollListener.resetListener();
+                pokemonPresenter.getFullPokemonList();
+            }
+        });
+
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFailed(false);
                 pokemonPresenter.getFullPokemonList();
             }
         });
@@ -169,7 +179,7 @@ public class PokemonViewActivity extends AppCompatActivity implements PokemonVie
 
     @Override
     public void showFailed(Boolean showLayout) {
-        pokemonFailed.setVisibility(showLayout ? View.VISIBLE : View.GONE);
+        errorLayout.setVisibility(showLayout ? View.VISIBLE : View.GONE);
     }
 
     private void closeKeyboard() {
