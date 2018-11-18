@@ -24,6 +24,7 @@ public class PokemonPresenter implements PokemonPresenterContract {
     private List<Result> allResultList;
     private List<Result> showResultList = new ArrayList<>();
     private static int pageCounter;
+    private static int totalCount;
 
     public PokemonPresenter(PokemonViewContract pokemonViewContract, RemoteRepository remoteRepository) {
         this.view = pokemonViewContract;
@@ -93,8 +94,8 @@ public class PokemonPresenter implements PokemonPresenterContract {
         remoteRepository.getPokemonList().enqueue(new Callback<PokemonResponse>() {
             @Override
             public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
+                totalCount = response.body().getCount();
                 allResultList = new ArrayList<>(response.body().getResults());
-                Log.d("Result", allResultList.get(0).getName());
                 pageCounter = 1;
                 showPokemonList();
             }
@@ -109,20 +110,27 @@ public class PokemonPresenter implements PokemonPresenterContract {
     @Override
     public void showPokemonList() {
         view.showLoading(true);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showResultList.clear();
-                int page = pageCounter * 20;
-                for (int x = 20; x > 0; x--) {
-                    showResultList.add(allResultList.get(page - x));
+        // +1 below added because pageCounter go inside this first before proceeding
+        if(pageCounter <= (totalCount / 20) + 1){
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showResultList.clear();
+                    int page = pageCounter * 20;
+                    for (int x = 20; x > 0; x--) {
+                        showResultList.add(allResultList.get(page - x));
+                    }
+                    view.showLoading(false);
+                    view.addPokemonResults(showResultList);
+                    pageCounter++;
                 }
-                view.showLoading(false);
-                view.addPokemonResults(showResultList);
-                pageCounter++;
-            }
-        }, 2000);
+            }, 2000);
+        } else {
+            view.showLoading(false);
+            view.showToast("Limit reached!");
+        }
+
     }
 
     @Override
